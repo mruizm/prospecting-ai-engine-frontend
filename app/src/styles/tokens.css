@@ -1,0 +1,99 @@
+/* Design tokens — ported from the accepted mockup
+   (prospecting-ai-engine-backend: docs/ui/mockups.html). Keep this file as
+   the single source of truth for color; components consume the custom
+   properties below and never hardcode hex values. */
+:root {
+  --bg: #f7f8f6;
+  --surface: #ffffff;
+  --surface-2: #eef1ee;
+  --surface-3: #e4e7e2;
+  --border: rgba(11, 15, 14, 0.12);
+  --border-strong: rgba(11, 15, 14, 0.24);
+  --ink: #0b0f0e;
+  --ink-secondary: #4c534f;
+  --ink-muted: #838b85;
+  --accent: #2a78d6;
+  --accent-strong: #184f95;
+  --accent-soft: rgba(42, 120, 214, 0.1);
+  --accent-soft-strong: rgba(42, 120, 214, 0.18);
+  --good: #0ca30c;
+  --good-soft: rgba(12, 163, 12, 0.12);
+  --warning: #b8790a;
+  --warning-soft: rgba(250, 178, 25, 0.2);
+  --serious: #c85a34;
+  --serious-soft: rgba(236, 131, 90, 0.18);
+  --critical: #d03b3b;
+  --critical-soft: rgba(208, 59, 59, 0.12);
+  --series-1: #2a78d6;
+  --series-2: #c85a20;
+  --series-3: #0e8f61;
+  --series-4: #a3720a;
+  --series-5: #c14b7a;
+  --shadow: 0 1px 2px rgba(11, 15, 14, 0.04), 0 6px 20px -8px rgba(11, 15, 14, 0.1);
+  --radius: 10px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0e0d;
+    --surface: #161817;
+    --surface-2: #1e2120;
+    --surface-3: #282c2a;
+    --border: rgba(255, 255, 255, 0.12);
+    --border-strong: rgba(255, 255, 255, 0.24);
+    --ink: #f2f4f2;
+    --ink-secondary: #c3c2b7;
+    --ink-muted: #8b938c;
+    --accent: #3987e5;
+    --accent-strong: #86b6ef;
+    --accent-soft: rgba(57, 135, 229, 0.16);
+    --accent-soft-strong: rgba(57, 135, 229, 0.26);
+    --good: #0ca30c;
+    --good-soft: rgba(12, 163, 12, 0.2);
+    --warning: #fab219;
+    --warning-soft: rgba(250, 178, 25, 0.2);
+    --serious: #ec835a;
+    --serious-soft: rgba(236, 131, 90, 0.2);
+    --critical: #e66767;
+    --critical-soft: rgba(230, 103, 103, 0.18);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -10px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d0e0d;
+  --surface: #161817;
+  --surface-2: #1e2120;
+  --surface-3: #282c2a;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --ink: #f2f4f2;
+  --ink-secondary: #c3c2b7;
+  --ink-muted: #8b938c;
+  --accent: #3987e5;
+  --accent-strong: #86b6ef;
+  --accent-soft: rgba(57, 135, 229, 0.16);
+  --accent-soft-strong: rgba(57, 135, 229, 0.26);
+  --good: #0ca30c;
+  --good-soft: rgba(12, 163, 12, 0.2);
+  --warning: #fab219;
+  --warning-soft: rgba(250, 178, 25, 0.2);
+  --serious: #ec835a;
+  --serious-soft: rgba(236, 131, 90, 0.2);
+  --critical: #e66767;
+  --critical-soft: rgba(230, 103, 103, 0.18);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -10px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
