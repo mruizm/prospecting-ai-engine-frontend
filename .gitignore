@@ -1,4 +1,5 @@
 node_modules/
+app/.angular/
 dist/
 .env
 .env.local

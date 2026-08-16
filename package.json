@@ -2,6 +2,9 @@
   "name": "prospecting-ai-engine-frontend",
   "private": true,
   "version": "0.1.0",
+  "engines": {
+    "node": ">=20.19 <25"
+  },
   "workspaces": [
     "app",
     "server"

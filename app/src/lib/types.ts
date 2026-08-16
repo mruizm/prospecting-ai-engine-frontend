@@ -74,6 +74,38 @@ export interface AnalysisAccepted {
   created_at: string;
 }
 
+export interface AnalysisSummary {
+  id: string;
+  company_name: string;
+  url: string;
+  preset_id: string;
+  status: AnalysisStatus;
+  progress_percent: number;
+  wpt_test_id: string | null;
+  warning_count: number;
+  capabilities_completed: number;
+  capabilities_total: number;
+  report_available: boolean;
+  created_at: string;
+  completed_at: string | null;
+}
+
+export interface AnalysisListResponse {
+  items: AnalysisSummary[];
+  next_cursor: string | null;
+}
+
+export interface AnalysisListParams {
+  status?: AnalysisStatus;
+  query?: string;
+  company_name?: string;
+  url?: string;
+  created_from?: string;
+  created_to?: string;
+  limit?: number;
+  cursor?: string;
+}
+
 export interface TestRun {
   id: string;
   preset_id: string;

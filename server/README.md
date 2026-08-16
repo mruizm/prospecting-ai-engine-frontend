@@ -14,6 +14,14 @@ A small Express backend-for-frontend. Two jobs:
 In production it also serves the built SPA from `app/dist`, so the whole
 console is one origin with no CORS configuration needed.
 
+## Environment loading
+
+The server loads `.env` from the repository root, not from `server/`. This is
+resolved relative to the running module so it behaves the same under `tsx` in
+development and from `server/dist` in production. Values supplied by the shell
+or deployment platform take precedence. `DOTENV_CONFIG_PATH` can point to an
+alternative env file when needed.
+
 ## Routes
 
 | Route | Auth | Does |

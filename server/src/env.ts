@@ -1,4 +1,15 @@
-import "dotenv/config";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { config } from "dotenv";
+
+const moduleDirectory = path.dirname(fileURLToPath(import.meta.url));
+const repositoryEnvPath = path.resolve(moduleDirectory, "../../.env");
+
+// npm runs workspace scripts with server/ as the working directory. Resolve
+// the documented repository-root .env from this module so development and
+// compiled production builds load the same file. Existing process variables
+// retain precedence because dotenv's override option defaults to false.
+config({ path: process.env.DOTENV_CONFIG_PATH ?? repositoryEnvPath, quiet: true });
 
 function required(name: string): string {
   const value = process.env[name];

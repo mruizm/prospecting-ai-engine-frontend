@@ -27,36 +27,33 @@ Adapted from the original plan and mockups produced in the backend repo at
 
 No separate screen for presets or capability config in v1 — that's operational configuration (`config/*.json`), not a sales-facing concern.
 
-## 3. Known backend gap
+## 3. Shared analysis workspace
 
-**There is no list/search endpoint for analyses.** The engine API exposes
-`POST /analyses`, `GET /analyses/{id}`, `GET /analyses/{id}/report`, and
-`GET /presets` only — nothing enumerates past analyses. The Dashboard screen
-in this scaffold reflects that honestly: it renders the gap as a visible
-notice rather than fabricated data.
-
-Proposed addition, small and additive:
+The backend now exposes the compact history endpoint:
 
 ```
-GET /v1/performance/analyses?status=&company_name=&limit=&cursor=
+GET /v1/performance/analyses?status=&query=&created_from=&created_to=&limit=&cursor=
 ```
 
-Cursor-paginated, newest first, same auth as the rest of the router. Until
-it lands, the Dashboard can only ever show analyses this browser session
-itself created (kept client-side), which is what the scaffold does.
+It is cursor-paginated, newest first, and uses the same authentication as the
+rest of the API. Dashboard and sidebar history are therefore shared across
+browsers and users of the console rather than stored in browser `localStorage`.
+The dashboard persists filters in query parameters and polls only while visible
+results contain non-terminal analyses.
 
 ## 4. Tech stack
 
-- **SPA, not SSR.** Internal, API-key-gated tool, no SEO surface — React +
-  TypeScript on Vite.
-- **Data fetching:** TanStack Query. `refetchInterval` is a function of the
-  last response's `status`: fast while non-terminal, off once `completed`,
-  `completed_partial`, or `failed` — mirroring the engine's own adaptive
-  polling philosophy.
-- **Components:** hand-built against the token system in `app/src/styles`,
-  ported from the mockup — the four-screen surface here doesn't justify a
-  component kit yet. Revisit if the surface grows (Radix primitives are the
-  natural next step for a dialog/combobox/tooltip need).
+- **SPA, not SSR.** Internal, API-key-gated tool, no SEO surface — Angular +
+  TypeScript using standalone components and Angular Router.
+- **Data fetching:** a typed Angular service backed by `fetch`. Page components
+  schedule polling while responses are non-terminal, and cancel timers when
+  destroyed or once status is `completed`, `completed_partial`, or `failed` —
+  mirroring the engine's own adaptive polling philosophy.
+- **Components:** PrimeNG 20 provides accessible interaction primitives. An
+  application-owned Aura preset maps them to the product palette, density, and
+  light/dark surfaces. Reusable application states live in
+  `app/src/app/ui/components`; product layout and report visualizations remain
+  application-owned rather than depending on PrimeNG internals.
 - **Charts:** hand-rolled SVG/CSS (resource-composition bars). Nothing here
   needs a charting library.
 - **Auth / API key handling:** `server/` is a BFF that holds the engine's
@@ -82,13 +79,23 @@ when a failed analysis has no report (shown as the failure state with
 - **Phase 1 (this scaffold):** app + BFF scaffold, design tokens/component
   primitives, typed API client, New Analysis wired to `POST /analyses` and
   `GET /presets`, Analysis Detail wired to `GET /analyses/{id}` with
-  polling, Report wired to `GET /analyses/{id}/report`. Dashboard shows the
-  backend-gap notice plus any analyses created this session.
-- **Phase 2:** the list endpoint (backend) + a real Dashboard against it;
-  warnings/error states hardened against live data instead of fixtures.
-- **Phase 3:** "copy talking points" action, evidence appendix polish,
-  loading/empty states audited against real latency.
-- **Phase 4 (stretch):** shareable read-only report link for prospects/AEs,
+  polling, and Report wired to `GET /analyses/{id}/report`.
+- **Angular migration (done):** replace the React/Vite client with Angular
+  standalone components while preserving the BFF contract, screen routes,
+  lifecycle polling, browser-local recents, and report behavior.
+- **Phase 2 (done):** compact list endpoint, shared server-backed dashboard and
+  sidebar, URL-persisted filters, cursor pagination, summary metrics, selective
+  polling, and hardened loading/empty/error states.
+- **PrimeNG migration (done):** standardized forms, actions, messages, cards,
+  tables, status indicators, progress, lifecycle/event views, and report
+  disclosure controls; introduced reusable UI states, application theming, and
+  lazy page routes.
+- **Phase 3 (done):** copy actions for report summaries, individual findings,
+  and talking points; filterable finding accordion; evidence appendix and
+  loading/empty/error-state polish.
+- **Phase 4:** recovery actions for failed or partial analyses, confirmation
+  flows for destructive operations, and operator-facing retry diagnostics.
+- **Phase 5 (stretch):** shareable read-only report link for prospects/AEs,
   PDF export, saved/starred analyses, real SSO, org-wide dashboard filters.
 
 ## 7. Open questions for the backend team
