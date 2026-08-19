@@ -18,7 +18,7 @@ import { PageHeaderComponent } from "../ui/components/page-header.component";
 @Component({
   selector: "app-analysis-detail",
   imports: [ButtonModule, CardModule, MessageModule, CapabilityRunsComponent, TestRunsComponent, StatusChipComponent, StepperComponent, TimelineComponent, ErrorStateComponent, LoadingStateComponent, PageHeaderComponent],
-  template: `<section class="view">
+  template: `<section class="view analysis-detail-view">
     @if (loading()) { <app-loading-state message="Loading analysis…" /> }
     @else if (error()) { <app-error-state [message]="'Could not load this analysis: ' + error()" retryLabel="Retry" (retry)="retry()" /> }
     @else if (analysis(); as item) {
@@ -28,7 +28,9 @@ import { PageHeaderComponent } from "../ui/components/page-header.component";
       <app-stepper [status]="item.status" [progress]="item.progress" />
       @if (item.warnings.length) { <p-message severity="warn" [text]="item.warnings.length + ' warning' + (item.warnings.length === 1 ? ': ' : 's: ') + item.warnings.join(' · ')" /> }
       @if (item.status === 'failed') { <p-message severity="error" [text]="(item.error_code || 'Analysis failed') + '. ' + (item.error_message || '')" /> }
-      @if (item.report_url) { <p-card styleClass="report-ready"><div class="report-ready-content"><div><b>Report ready.</b> <span class="cell-muted">Findings, opportunities, and talking points.</span></div>
+      @if (item.report_url) { <p-card styleClass="report-ready"><div class="report-ready-content"><div class="report-ready-copy">
+        <div class="report-ready-title"><i class="pi pi-check-circle" aria-hidden="true"></i><strong>Report ready</strong></div>
+        <p>Review the findings, prioritized opportunities, and sales talking points.</p></div>
         <p-button label="View report" icon="pi pi-arrow-right" iconPos="right" size="small" (onClick)="openReport(item.id)" /></div></p-card> }
       <div class="section-title">Test runs</div><app-test-runs [runs]="item.test_runs" />
       <div class="section-title">Capability agents</div><app-capability-runs [runs]="item.capability_runs" />

@@ -150,12 +150,76 @@ horizontal scrolling.
 capability cards to their grid columns and enabled safe wrapping for long
 WebPageTest IDs, status messages, and agent errors.
 
+**Report-ready presentation (completed):** separated the completion status from
+its supporting description and added a clear success icon and report action.
+
 **Evidence appendix alignment (completed):** standardized evidence-group
-headers so every record count occupies the same right-aligned column.
+headers so every record count occupies the same right-aligned column with
+consistent spacing before the expansion chevron. Header grids explicitly fill
+the available accordion width so alignment is independent of label length.
 
 **Executive-summary typography (completed):** improved report readability with
-justified summary and narrative text, balanced line length, natural hyphenation,
-and more consistent paragraph spacing.
+balanced line length and consistent spacing.
+
+**Full-width report layout (completed):** expanded report sections across the
+available application content width while preserving responsive stacking and
+long-content overflow protection.
+
+**Capability coverage progress (completed):** upgraded report coverage with an
+explicit Complete/Partial state, diagnostic percentage, full-width progress
+bar, completion color, and visually separated per-capability statuses.
+
+**Cited talking-point accordions (completed):** each sales talking point now
+has a compact accordion header with citation-free prose. Expanding it reveals
+only the supporting evidence ID tags; detailed metrics remain in the Evidence
+Appendix.
+
+**Deep-link reload fix (completed):** added Angular's root base URL to the SPA
+document so lazy route chunks resolve from `/` when users directly open or
+reload nested URLs such as `/analyses/:id/report`.
+
+**Full-width analysis detail (completed):** expanded lifecycle progress, test
+runs, capability agents, and the event timeline across the available
+application content width.
+
+**Full-width dashboard (completed):** expanded filters, summary statistics,
+analysis history, and pagination across the available application content
+width while retaining responsive behavior.
+
+**Structured executive summary (completed):** transformed the synthesized
+summary and narrative blocks into scannable top-level bullets.
+
+**Single-column executive summary (completed):** presents summary claims in one
+consistent reading column inside the left half of the report.
+
+**Raised report sidebar (completed):** placed Executive Summary in the left
+half of an equal-width report grid and moved Prioritized Opportunities, byte
+evidence, and Talking Points to the upper-right column. Findings continue below
+the summary. The summary card stretches to match the complete right-column
+height for a balanced upper layout, while the final right-side card fills any
+height introduced by expanding summary items.
+
+**Executive-summary citation placement (completed):** summary items use clean,
+two-column accordion headers with left-side chevrons and no dividers or
+duplicate right-side icons. Evidence IDs—including underscore-based namespaces
+such as `THIRD_PARTY`—are removed from collapsed prose and shown only as tags
+inside the expanded item.
+
+**Finding-header alignment (completed):** standardized priority, title,
+statement type, confidence, and chevron spacing across all finding entries,
+with a consistent two-row arrangement on narrow screens.
+
+**Contained Findings section (completed):** moved the Findings title, priority
+filters, empty state, and finding accordion into one shared PrimeNG card that
+spans the full report width below the upper summary/sidebar grid.
+
+**Evidence ID search (completed):** added case-insensitive evidence-ID filtering
+to the Evidence Appendix, visible IDs in matching rows, filtered namespace
+counts, a dedicated empty-result state, and right-aligned desktop placement.
+
+**Contained Evidence Appendix (completed):** moved the appendix title, ID
+search, empty state, namespace groups, and evidence rows into one shared
+PrimeNG card.
 
 ## Status
 

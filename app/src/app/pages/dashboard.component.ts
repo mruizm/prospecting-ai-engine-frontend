@@ -65,7 +65,7 @@ const STATUS_OPTIONS: AnalysisStatus[] = [
     LoadingStateComponent,
     PageHeaderComponent,
   ],
-  template: `<section class="view">
+  template: `<section class="view dashboard-view">
     <app-page-header title="Analyses" subtitle="Shared performance diagnostics across the sales and presales team." />
 
     <p-card styleClass="dashboard-filter-card"><div class="dashboard-filters">
